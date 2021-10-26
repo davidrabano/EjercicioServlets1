@@ -2,23 +2,27 @@ package servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MostrarEmpleadosServ
+ * Servlet implementation class MostrarDatosServ
  */
-//@WebServlet("/MostrarEmpleadosServ")
-@WebServlet("/MostrarEmpleados")
-public class MostrarEmpleadosServ extends HttpServlet {
+@WebServlet(
+		urlPatterns = { "/MostrarDatos" }, 
+		initParams = { 
+				@WebInitParam(name = "table", value = "DireccionServletCorresp")
+		})
+public class MostrarDatosServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MostrarEmpleadosServ() {
+    public MostrarDatosServ() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,8 +33,6 @@ public class MostrarEmpleadosServ extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		// Aquí se debería conseguir las tabla de empleado...
 	}
 
 	/**
@@ -39,8 +41,6 @@ public class MostrarEmpleadosServ extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
-		// Aquí se debería conseguir las tabla empleado...
 	}
 
 }
