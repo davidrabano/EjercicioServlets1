@@ -10,3 +10,10 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
 </web-app>
+
+<!-- Creamos los mapping de los servlets: Creo que esto no hace falta y además, está mal
+<servlet-mapping>
+  <servlet-name>MiPrimerServlet</servlet-name>
+  <url-pattern>/URLMiPrimerServlet</url-pattern>
+</servlet-mapping>
+-->
