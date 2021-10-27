@@ -43,7 +43,8 @@ public class MostrarDepartamentosServ extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		processRequest(request, response);
-	}
+		
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -51,6 +52,7 @@ public class MostrarDepartamentosServ extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+
 	}
 	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -74,7 +76,6 @@ public class MostrarDepartamentosServ extends HttpServlet {
 			//out.println("<td><strong></strong></td>");			
 			out.println("</tr>");
 	
-
 			Session session = HibernateUtil.getSessionFactory().openSession(); // Copiada la clase HibernateUtil de su
 			// proyecto
 			Transaction tx = null;

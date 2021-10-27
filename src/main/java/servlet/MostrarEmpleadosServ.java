@@ -46,6 +46,8 @@ public class MostrarEmpleadosServ extends HttpServlet {
 
 		processRequest(request, response);
 
+		
+
 	}
 
 	/**
@@ -56,6 +58,8 @@ public class MostrarEmpleadosServ extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
+
 	}
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
