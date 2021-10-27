@@ -96,7 +96,7 @@ public class MostrarEmpleadosServ extends HttpServlet {
 					out.println("<td>" + empl.getApellido1() + "</td>");
 					out.println("<td>" + empl.getApellido2() + "</td>");
 					out.println("<td>" + empl.getCodDepartamento() + "</td>");
-					out.println("<tr>");
+					out.println("</tr>");
 				}
 			} catch (Exception e) {
 				if (tx != null) {

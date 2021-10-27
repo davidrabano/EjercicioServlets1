@@ -72,7 +72,7 @@ public class MostrarDepartamentosServ extends HttpServlet {
 			out.println("<td><strong>Código_responsable</strong></td>");
 			out.println("<td><strong>Nombre</strong></td>");
 			//out.println("<td><strong></strong></td>");			
-			out.println("<tr>");
+			out.println("</tr>");
 	
 
 			Session session = HibernateUtil.getSessionFactory().openSession(); // Copiada la clase HibernateUtil de su
