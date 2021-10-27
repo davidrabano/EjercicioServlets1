@@ -34,6 +34,22 @@ public class MostrarDatosServ extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		String param=request.getParameter("table");
+		
+		if (param!=null) {
+			if (param.equals("departamento")) {
+				request.getRequestDispatcher("/MostrarDepartamentos").forward(request, response);
+				// logger
+			} else if (param.equals("empleado")){
+				request.getRequestDispatcher("/MostrarEmpleados").forward(request, response);
+				// logger
+			}
+			
+		}
+		else {
+			// logger
+		}
+		
 				
 	}
 
