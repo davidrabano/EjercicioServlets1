@@ -1,11 +1,23 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import dao.EmpleadoDAO;
+
+import entity.Empleado;
+import utils.HibernateUtil;
+
 
 /**
  * Servlet implementation class MostrarEmpleadosServ
@@ -14,29 +26,95 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/MostrarEmpleados")
 public class MostrarEmpleadosServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MostrarEmpleadosServ() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public MostrarEmpleadosServ() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		processRequest(request, response);
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		try (PrintWriter out = response.getWriter()) {
+			/* TODO output your page here. You may use following sample code. */
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>Servlet Mostrar Empleados</title>");
+			out.println("</head>");
+			out.println("<body>");
+			out.println("<h1>Servlet MostrarEmpleadosServ at " + request.getContextPath() + "</h1>");
+			
+			out.println("<table>");
+			out.println("<tr>");
+			out.println("<td><strong>Código</strong></td>");
+			out.println("<td><strong>Nombre</strong></td>");
+			out.println("<td><strong>Apellido1</strong></td>");
+			out.println("<td><strong>Apellido2</strong></td>");
+			out.println("<td><strong>Código_departamento</strong></td>");
+			//out.println("<td><strong></strong></td>");			
+			out.println("<tr>");
+	
+
+			Session session = HibernateUtil.getSessionFactory().openSession(); // Copiada la clase HibernateUtil de su
+			// proyecto
+			Transaction tx = null;
+
+			try {
+				tx = session.beginTransaction();
+				List<Empleado> empleadosTabla = EmpleadoDAO.getAllEmpleados(session);
+				for (Empleado empl : empleadosTabla) {
+					out.println("<tr>");
+					out.println("<td>" + empl.getCodigo() + "</td>");
+					out.println("<td>" + empl.getNombre() + "</td>");
+					out.println("<td>" + empl.getApellido1() + "</td>");
+					out.println("<td>" + empl.getApellido2() + "</td>");
+					out.println("<td>" + empl.getCodDepartamento() + "</td>");
+					out.println("<tr>");
+				}
+			} catch (Exception e) {
+				if (tx != null) {
+					tx.rollback();
+				}
+				//logger.error(String.format("%1$s: error when inserting registries.", "insertEmpleado"), e);
+
+			} finally {
+				if (session != null) {
+					session.close();
+				}
+			}
+			
+			out.println("</table>");
+
+			out.println("</body>");
+			out.println("</html>");
+		}
 	}
 
 }
