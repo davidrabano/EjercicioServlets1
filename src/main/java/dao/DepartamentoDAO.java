@@ -29,6 +29,7 @@ public class DepartamentoDAO {
 		s.delete(departamento);
 	}
 	
+	// Devuelve la lista de registros en la tabla departamento
 	public static List<Departamento> getAllDepartamentos(Session s) {
 		//String hQuery = "from Departamento"; // Sin ordenar
 		String hQuery = "from Departamento order by codigo";
